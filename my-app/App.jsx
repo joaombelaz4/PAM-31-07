@@ -1,38 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
-import { InputDDD }  from './components/Inputs';
-import CardCidade from './components/CardCidade';
+import { View,  StyleSheet } from 'react-native';
+import Tela_ddd from './screens/Tela_ddd';
 
-import * as ddd from './services/ddd.js';
 export default function App() {
-
-
-  const exibirCidadesDoDDD = (digito) => {
-    if (!digito || digito.length !== 2) {
-      return;
-    }
-    ddd.getDDD(digito)
-    .then((resposta) => {
-      console.log(resposta);
-    })
-    .catch((error) => {
-      console.error('Error fetching DDD:', error);
-    });
-  }
-
-
 
   return (
     <View style={styles.container}>
-      <InputDDD 
-        onChangeText={
-          (ddd)=>exibirCidadesDoDDD(ddd.trim())
-        } 
-      />
-      <CardCidade
-        nome="São Paulo"
-        uf="SP"
-      />
+      <Tela_ddd />
       <StatusBar style="auto" />
     </View>
   );
@@ -40,9 +14,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    flex: 1   
   }
 });

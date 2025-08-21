@@ -4,19 +4,24 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import CardCep from '../components/CardCep';
 
 import Tela_ddd from './screens/Tela_ddd';
 import Tela_cep from './screens/Tela_cep';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import Tela_fipe from './screens/tela_fipe';
+import Tela_feriado from './screens/tela_feriado';
+import Tela_isbn from './screens/tela_isbn';
+import Tela_cnpj from './screens/tela_cnpj';
+import Tela_cambio from './screens/Tela_cambio';
 
-const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator
+      <Drawer.Navigator
         screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, size }) => {
+          tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             if (route.name === 'DDD') {
               iconName = focused ? 'call' : 'call-outline';
@@ -27,28 +32,22 @@ export default function App() {
           },
         })}
       >
-        <Tab.Screen name="DDD" component={Tela_ddd} />
-        <Tab.Screen name="CEP" component={Tela_cep} />
-      </Tab.Navigator>
+        <Drawer.Screen name="DDD" component={Tela_ddd} />
+        <Drawer.Screen name="CEP" component={Tela_cep} />
+        <Drawer.Screen name="FIPE" component={Tela_fipe} />
+        <Drawer.Screen name="FERIADO" component={Tela_feriado} />
+        <Drawer.Screen name="ISBN" component={Tela_isbn} />
+        <Drawer.Screen name="CNPJ" component={Tela_cnpj} />
+        <Drawer.Screen name="CAMBIO" component={Tela_cambio} />
+      </Drawer.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
   );
-}
-
-{erro ? (
-  <Text style={styles.erro}>{erro}</Text>
-) : resultado && (
-  <CardCep
-    cep={resultado.cep}
-    city={resultado.city}
-    state={resultado.state}
-    neighborhood={resultado.neighborhood}
-    street={resultado.street}
-  />
-)}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
 });
+

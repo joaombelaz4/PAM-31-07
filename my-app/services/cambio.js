@@ -1,7 +1,7 @@
 import * as config from './config.js';
 
-export const getDDD = async (cambio) => {
-    const url = `${config.url_api()}/cambio/v1/${cambio}`;
+export const getDDD = async (moedas) => {
+    const url = `${config.url_api()}/cambio/v1/${moedas}`;
     const options = {
         method: 'GET',
         headers: {

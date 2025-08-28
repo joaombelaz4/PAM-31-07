@@ -7,7 +7,6 @@ export default function Tela_cep() {
   const [erro, setErro] = useState('');
 
   const buscarCep = async (valor) => {
-    // Permite apenas números
     const cepLimpo = valor.replace(/\D/g, '');
     setCep(cepLimpo);
     setErro('');

@@ -11,7 +11,8 @@ export const getIsbn = async (codigo) => {
     try {
         const response = await fetch(url, options);
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            const text = await response.text();
+            throw new Error(`HTTP error ${response.status}: ${text}`);
             return;
         }
         

@@ -1,20 +1,18 @@
 import * as config from './config.js';
 
 export const getDDD = async (ano) => {
-    const url = `${config.url_api()}/feriados/v1/${ano}`;
-    const options = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json'
-        }
-    };
+    // valida ano
+    const year = String(ano).trim();
+    if (!/^[0-9]{4}$/.test(year)) {
+        throw new Error('Ano inválido. Use formato YYYY, ex: 2025');
+    }
+
+    const url = `${config.url_api()}/feriados/v1/${year}`;
     try {
-        const response = await fetch(url, options);
+        const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
-            return;
         }
-        
         return await response.json();
     } catch (error) {
         console.error('Error fetching ano data:', error);

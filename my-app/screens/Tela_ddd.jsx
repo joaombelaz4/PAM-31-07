@@ -4,9 +4,6 @@ import { InputDDD } from '../components/Inputs';
 import CardCidade from '../components/CardCidade';
 import * as ddd from '../services/ddd.js';
 
-//Para mostrar os dados na tela, 
-// você pode usar um useState para guardar o resultado e renderizar 
-// com o CardCidade
 
 export default function Tela_ddd() {
   const [cidade, setCidade] = useState(null);
@@ -18,7 +15,6 @@ export default function Tela_ddd() {
     }
     ddd.getDDD(digito)
       .then((resposta) => {
-        // resposta pode ser um array de cidades, adapte conforme retorno da API
         if (resposta && resposta.cities && resposta.cities.length > 0) {
           setCidade({ nome: resposta.cities[0], uf: resposta.state });
         } else {

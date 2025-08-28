@@ -1,25 +1,31 @@
-import { StyleSheet, View, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, View, TextInput, ScrollView, Text } from 'react-native';
 import { useState } from 'react';
 import CardFeriado from '../components/CardFeriado';
 import * as feriado from '../services/feriado.js';
 
 export default function Tela_feriado() {
+  
   const [feriados, setFeriados] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const buscarFeriados = (ano) => {
     if (!ano || ano.length !== 4) {
       setFeriados([]);
       return;
     }
+    setLoading(true);
+    setError(null);
     feriado.getDDD(ano)
       .then((res) => {
+        setLoading(false);
         if (Array.isArray(res)) {
           setFeriados(res);
         } else {
           setFeriados([]);
         }
       })
-      .catch(() => setFeriados([]));
+      .catch((err) => { setFeriados([]); setLoading(false); setError(err.message || 'Erro'); });
   };
 
   return (
@@ -31,6 +37,8 @@ export default function Tela_feriado() {
         maxLength={4}
         onChangeText={buscarFeriados}
       />
+      {loading && <Text>Carregando...</Text>}
+      {error && <Text style={{ color: 'red' }}>{error}</Text>}
       <ScrollView style={{ width: '100%' }}>
         {feriados.map((f, idx) => (
           <CardFeriado key={idx} date={f.date} name={f.name} type={f.type} />

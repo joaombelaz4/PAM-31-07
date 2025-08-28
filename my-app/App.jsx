@@ -13,6 +13,7 @@ import Tela_feriado from './screens/tela_feriado';
 import Tela_isbn from './screens/tela_isbn';
 import Tela_cnpj from './screens/tela_cnpj';
 import Tela_cambio from './screens/Tela_cambio';
+import Tela_IBGE from './screens/Tela_IBGE';
 
 const Drawer = createDrawerNavigator();
 
@@ -39,6 +40,7 @@ export default function App() {
         <Drawer.Screen name="ISBN" component={Tela_isbn} />
         <Drawer.Screen name="CNPJ" component={Tela_cnpj} />
         <Drawer.Screen name="CAMBIO" component={Tela_cambio} />
+        <Drawer.Screen name="IBGE" component={Tela_IBGE} />
       </Drawer.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

@@ -19,8 +19,8 @@ export const  InputCNPJ = ({ onChangeText }) => {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        maxLength={2}
-        placeholder="Digite o CNPJ"
+  maxLength={14}
+  placeholder="Digite o CNPJ (somente números)"
         keyboardType="numeric"
         onChangeText={onChangeText}
       />

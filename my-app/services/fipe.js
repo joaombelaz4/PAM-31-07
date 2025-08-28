@@ -1,21 +1,18 @@
 import * as config from './config.js';
 
 export const getFipe = async (codigoFipe) => {
-    const url = `${config.url_api()}/fipe/preco/v1/${codigoFipe}`;
-    const options = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json'
-        }
-    };
+    const code = String(codigoFipe || '').trim();
+    if (!code) throw new Error('Código FIPE inválido');
+
+    const url = `${config.url_api()}/fipe/preco/v1/${code}`;
     try {
-        const response = await fetch(url, options);
+        const response = await fetch(url);
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-            return;
+            if (response.status === 404) throw new Error('Código FIPE não encontrado');
+            const text = await response.text().catch(() => '');
+            throw new Error(`HTTP error ${response.status}: ${text}`);
         }
-        
-    return await response.json();
+        return await response.json();
     } catch (error) {
         console.error('Error fetching fipe data:', error);
         throw error;
